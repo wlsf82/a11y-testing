@@ -30,7 +30,7 @@
       'ph.nome': 'Recipient name',
       'btn.transfer': 'Transfer',
       'transfer.status': 'Transfer to {name} sent (simulation).',
-      'transfer.fallbackName': 'recipient',
+      'transfer.incomplete': 'Please fill in all fields before transferring.',
       'offer.title': 'Order your Simulado Black card',
       'offer.note': 'No annual fee for the first year. Terms apply.',
       'footer.legal': 'Banco Simulado S.A. · Demo environment · Not a real institution.',
@@ -57,7 +57,7 @@
       'ph.nome': 'Nome do favorecido',
       'btn.transfer': 'Transferir',
       'transfer.status': 'Transferência para {name} enviada (simulação).',
-      'transfer.fallbackName': 'favorecido',
+      'transfer.incomplete': 'Preencha todos os campos antes de transferir.',
       'offer.title': 'Peça seu cartão Simulado Black',
       'offer.note': 'Anuidade grátis no primeiro ano. Consulte condições.',
       'footer.legal': 'Banco Simulado S.A. · Ambiente de demonstração · Não é uma instituição real.',
@@ -84,7 +84,7 @@
       'ph.nome': 'Nombre del beneficiario',
       'btn.transfer': 'Transferir',
       'transfer.status': 'Transferencia a {name} enviada (simulación).',
-      'transfer.fallbackName': 'beneficiario',
+      'transfer.incomplete': 'Completa todos los campos antes de transferir.',
       'offer.title': 'Solicita tu tarjeta Simulado Black',
       'offer.note': 'Sin cuota anual el primer año. Aplican condiciones.',
       'footer.legal': 'Banco Simulado S.A. · Entorno de demostración · No es una institución real.',
@@ -220,8 +220,22 @@
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var nome = document.getElementById('f-nome').value.trim() || t('transfer.fallbackName');
+
+    // Só permite a transferência quando todos os campos estão preenchidos.
+    var inputs = form.querySelectorAll('.field__input');
+    var allFilled = Array.prototype.every.call(inputs, function (input) {
+      return input.value.trim() !== '';
+    });
+
+    if (!allFilled) {
+      status.textContent = t('transfer.incomplete');
+      status.classList.add('form__status--error');
+      return;
+    }
+
+    var nome = document.getElementById('f-nome').value.trim();
     status.textContent = t('transfer.status').replace('{name}', nome);
+    status.classList.remove('form__status--error');
     form.reset();
   });
 

@@ -193,6 +193,7 @@ body.a11y .muted { color: var(--muted-good); }
 .btn-primary:hover { background: var(--brand-light); }
 .btn-primary:focus-visible { outline: 3px solid #93c5fd; outline-offset: 2px; }
 .form__status { font-size: 13px; color: var(--brand-light); font-weight: 600; margin: 0; }
+.form__status--error { color: #c81e1e; }
 
 /* ---------- Oferta de cartão ---------- */
 .offer__img { width: 100%; max-width: 260px; height: auto; border-radius: 14px; }
