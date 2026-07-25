@@ -1,0 +1,295 @@
+:root {
+  --brand: #064635;
+  --brand-light: #0a7d5f;
+  --page-bg: #f2f4f3;
+  --card-bg: #ffffff;
+  --text: #1a1a1a;
+  --border: #e2e6e4;
+
+  /* BUG #1 — cinza claro demais sobre branco (~2.5:1). */
+  --muted-bad: #a9a9a9;
+  /* Correção acessível (~7:1). */
+  --muted-good: #4a5551;
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--page-bg);
+  color: var(--text);
+  line-height: 1.45;
+  /* Layout de viewport único: sem rolagem vertical. */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ---------- Barra da demonstração ---------- */
+.demo-bar {
+  background: #1f2937;
+  color: #fff;
+  padding: 8px 16px;
+  flex: 0 0 auto;
+}
+.demo-bar__inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 20px;
+}
+.demo-bar__title { font-size: 14px; margin-right: auto; }
+.demo-bar__row { display: flex; align-items: center; }
+.lang {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+.lang select {
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid #6b7280;
+  background: #fff;
+  color: #1a1a1a;
+  font-size: 14px;
+}
+.lang select:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
+}
+.switch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.switch input { position: absolute; opacity: 0; width: 0; height: 0; }
+.switch__track {
+  width: 42px; height: 24px;
+  background: #6b7280;
+  border-radius: 999px;
+  position: relative;
+  flex: 0 0 auto;
+  transition: background .2s;
+}
+.switch__track::after {
+  content: "";
+  position: absolute;
+  top: 3px; left: 3px;
+  width: 18px; height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform .2s;
+}
+.switch input:checked + .switch__track { background: var(--brand-light); }
+.switch input:checked + .switch__track::after { transform: translateX(18px); }
+.switch input:focus-visible + .switch__track {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
+}
+
+/* ---------- Cabeçalho ---------- */
+.topbar {
+  background: var(--brand);
+  color: #fff;
+  flex: 0 0 auto;
+}
+.topbar__inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.topbar__logo { height: 36px; display: block; }
+.topbar__actions { display: flex; gap: 8px; }
+
+.icon-btn {
+  position: relative;
+  background: rgba(255,255,255,.12);
+  border: none;
+  color: #fff;
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  font-size: 18px;
+  cursor: pointer;
+}
+.icon-btn:hover { background: rgba(255,255,255,.22); }
+.icon-btn:focus-visible { outline: 3px solid #93c5fd; outline-offset: 2px; }
+.badge {
+  position: absolute;
+  top: -4px; right: -4px;
+  background: #e11d48;
+  color: #fff;
+  font-size: 11px;
+  min-width: 18px; height: 18px;
+  border-radius: 999px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 4px;
+}
+
+/* ---------- Página (dashboard em viewport único) ---------- */
+.page {
+  flex: 1 1 auto;
+  min-height: 0;               /* permite encolher sem estourar o viewport */
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 14px 16px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  align-content: stretch;
+}
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  min-height: 0;
+  overflow: auto;             /* rolagem interna só se um card ficar apertado */
+}
+.card__title { margin: 0 0 10px; font-size: 18px; }
+.balance { font-size: 30px; font-weight: 700; margin: 4px 0; }
+
+/* BUG #1 — texto secundário com baixo contraste (padrão). */
+.muted { color: var(--muted-bad); font-size: 14px; margin: 4px 0; }
+/* Modo acessível eleva o contraste. */
+body.a11y .muted { color: var(--muted-good); }
+
+/* ---------- Formulário ---------- */
+.form { display: flex; flex-direction: column; gap: 10px; }
+.field { display: flex; flex-direction: column; gap: 4px; }
+.field__fauxlabel { font-size: 13px; font-weight: 600; }
+.field__input {
+  padding: 9px 12px;
+  border: 1px solid #c7cdca;
+  border-radius: 10px;
+  font-size: 15px;
+}
+.field__input:focus-visible {
+  outline: 3px solid var(--brand-light);
+  outline-offset: 1px;
+  border-color: var(--brand-light);
+}
+.btn-primary {
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  padding: 11px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-primary:hover { background: var(--brand-light); }
+.btn-primary:focus-visible { outline: 3px solid #93c5fd; outline-offset: 2px; }
+.form__status { font-size: 13px; color: var(--brand-light); font-weight: 600; margin: 0; }
+
+/* ---------- Oferta de cartão ---------- */
+.offer__img { width: 100%; max-width: 260px; height: auto; border-radius: 14px; }
+.offer__divider { display: block; width: 100%; margin: 10px 0; }
+.offer__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px; height: 44px;
+  background: var(--brand);
+  color: #fff;
+  border-radius: 50%;
+  text-decoration: none;
+  font-size: 20px;
+}
+.offer__cta:focus-visible { outline: 3px solid #93c5fd; outline-offset: 2px; }
+
+/* ---------- Rodapé ---------- */
+.footer {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 8px 16px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.footer__legal { font-size: 12px; margin: 0; text-align: left; }
+.social { display: flex; gap: 10px; justify-content: center; flex: 0 0 auto; }
+.social__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; height: 40px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  text-decoration: none;
+  font-size: 18px;
+}
+.social__link:focus-visible { outline: 3px solid var(--brand-light); outline-offset: 2px; }
+
+/* ===== Mobile: layout empilhado original (com rolagem) =====
+   No desktop mantém-se o dashboard de viewport único (3 colunas);
+   abaixo de 800px volta ao layout mobile de coluna única. */
+@media (max-width: 800px) {
+  /* Libera a altura fixa do viewport para o conteúdo fluir e rolar. */
+  html, body { height: auto; }
+  body { display: block; overflow: visible; }
+
+  .demo-bar__inner,
+  .topbar__inner { max-width: 480px; }
+
+  /* Coluna única confortável, como no mobile original. */
+  .page {
+    max-width: 480px;
+    padding: 16px;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    align-content: start;
+  }
+  .card { padding: 20px; overflow: visible; }
+  .card__title { font-size: 20px; margin-bottom: 12px; }
+  .balance { font-size: 32px; }
+
+  .form { gap: 14px; }
+  .field { gap: 6px; }
+  .field__fauxlabel { font-size: 14px; }
+  .field__input { padding: 12px; font-size: 16px; }
+  .btn-primary { padding: 14px; font-size: 16px; }
+  .form__status { font-size: 14px; }
+
+  .offer__img { max-width: 320px; }
+  .offer__divider { margin: 14px 0; }
+  .offer__cta { width: 48px; height: 48px; }
+
+  /* Rodapé centralizado e empilhado, como no mobile original. */
+  .footer {
+    max-width: 480px;
+    padding: 24px 16px 40px;
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+  .footer__legal { text-align: center; font-size: 13px; }
+}
+
+/* Utilitário: conteúdo visível apenas para leitores de tela.
+   Usado pelo modo acessível para dar contexto a links/botões de ícone. */
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
