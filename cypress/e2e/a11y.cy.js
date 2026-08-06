@@ -104,4 +104,11 @@ describe('Simulado Bank', () => {
       runOnly: ["html-has-lang"],
     });
   })
+
+  // The below test should pass as we're toggling the a11y mode before checking a11y
+  it('finds no a11y issues', () => {
+    cy.get('.switch').click()
+
+    cy.checkA11y()
+  })
 })
