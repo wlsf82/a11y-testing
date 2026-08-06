@@ -4,7 +4,9 @@
   "description": "**Banco Simulado** — a small, dependency-free bank app that demonstrates the 6 most common web accessibility bugs, so you can practice finding and fixing them with tools like WAVE, axe DevTools, or a screen reader (NVDA / VoiceOver).",
   "main": "script.js",
   "scripts": {
-    "serve": "serve -l 3000"
+    "serve": "serve -l 3000",
+    "cy:open": "cypress open",
+    "test": "cypress run"
   },
   "repository": {
     "type": "git",
@@ -19,6 +21,9 @@
   },
   "homepage": "https://github.com/wlsf82/a11y-testing#readme",
   "devDependencies": {
+    "axe-core": "^4.13.0",
+    "cypress": "^15.20.0",
+    "cypress-axe": "^1.7.0",
     "serve": "^14.2.6"
   }
 }
