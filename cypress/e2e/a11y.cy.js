@@ -40,4 +40,20 @@ describe('Simulado Bank', () => {
       runOnly: ["image-alt"],
     });
   })
+
+  // The below test should fail as the app under test has label issues
+  it('finds no "label" a11y issue', () => {
+    cy.checkA11y(null, {
+      runOnly: ["label"],
+    });
+  })
+
+  // The below test should pass as we're toggling the a11y mode before checking a11y
+  it('finds no "label" a11y issue', () => {
+    cy.get('.switch').click()
+
+    cy.checkA11y(null, {
+      runOnly: ["label"],
+    });
+  })
 })
