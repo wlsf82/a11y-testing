@@ -56,4 +56,20 @@ describe('Simulado Bank', () => {
       runOnly: ["label"],
     });
   })
+
+  // The below test should fail as the app under test has link-name issues
+  it('finds no "link-name" a11y issue', () => {
+    cy.checkA11y(null, {
+      runOnly: ["link-name"],
+    });
+  })
+
+  // The below test should pass as we're toggling the a11y mode before checking a11y
+  it('finds no "link-name" a11y issue', () => {
+    cy.get('.switch').click()
+
+    cy.checkA11y(null, {
+      runOnly: ["link-name"],
+    });
+  })
 })
