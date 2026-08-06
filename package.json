@@ -1,0 +1,24 @@
+{
+  "name": "a11y-testing",
+  "version": "1.0.0",
+  "description": "**Banco Simulado** — a small, dependency-free bank app that demonstrates the 6 most common web accessibility bugs, so you can practice finding and fixing them with tools like WAVE, axe DevTools, or a screen reader (NVDA / VoiceOver).",
+  "main": "script.js",
+  "scripts": {
+    "serve": "serve -l 3000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wlsf82/a11y-testing.git"
+  },
+  "keywords": [],
+  "author": "Walmyr <wlsf82@gmail.com> (https://walmyr.dev/)",
+  "license": "MIT",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/wlsf82/a11y-testing/issues"
+  },
+  "homepage": "https://github.com/wlsf82/a11y-testing#readme",
+  "devDependencies": {
+    "serve": "^14.2.6"
+  }
+}
