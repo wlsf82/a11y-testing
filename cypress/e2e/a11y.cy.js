@@ -8,4 +8,20 @@ describe('Simulado Bank', () => {
   it('finds no a11y issues', () => {
     cy.checkA11y()
   })
+
+  // The below test should fail as the app under test has color-contrast issues
+  it('finds no "color-contrast" a11y issue', () => {
+    cy.checkA11y(null, {
+      runOnly: ["color-contrast"],
+    });
+  })
+
+  // The below test should pass as we're toggling the a11y mode before checking a11y
+  it('finds no "color-contrast" a11y issue', () => {
+    cy.get('.switch').click()
+
+    cy.checkA11y(null, {
+      runOnly: ["color-contrast"],
+    });
+  })
 })
