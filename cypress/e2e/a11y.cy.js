@@ -88,4 +88,20 @@ describe('Simulado Bank', () => {
       runOnly: ["button-name"],
     });
   })
+
+  // The below test should fail as the app under test has html-has-lang issues
+  it('finds no "html-has-lang" a11y issue', () => {
+    cy.checkA11y(null, {
+      runOnly: ["html-has-lang"],
+    });
+  })
+
+  // The below test should pass as we're toggling the a11y mode before checking a11y
+  it('finds no "html-has-lang" a11y issue', () => {
+    cy.get('.switch').click()
+
+    cy.checkA11y(null, {
+      runOnly: ["html-has-lang"],
+    });
+  })
 })
