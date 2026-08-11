@@ -22,7 +22,7 @@
   "homepage": "https://github.com/wlsf82/a11y-testing#readme",
   "devDependencies": {
     "axe-core": "^4.13.0",
-    "cypress": "^15.20.0",
+    "cypress": "^15.20.1",
     "cypress-axe": "^1.7.0",
     "serve": "^14.2.6"
   }
